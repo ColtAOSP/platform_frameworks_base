@@ -531,6 +531,10 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     boolean mLessBoringHeadsUp;
 
+    ActivityManager mAm;
+    private ArrayList<String> mStoplist = new ArrayList<String>();
+    private ArrayList<String> mBlacklist = new ArrayList<String>();
+
     // the tracker view
     int mTrackingPosition; // the position of the top of the tracking view.
 
@@ -6512,6 +6516,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LESS_BORING_HEADS_UP),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_STOPLIST_VALUES), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES), false, this);
+            update();
         }
 
         @Override
@@ -6603,6 +6612,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateRecentsMode();
             updateBatterySettings();
             setUseLessBoringHeadsUp();
+            setHeadsUpStoplist();
+            setHeadsUpBlacklist();
         }
     }
 
@@ -6726,6 +6737,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mSlimRecents != null) {
             mSlimRecents.rebuildRecentsScreen();
         }
+    }
+
+    private void setHeadsUpStoplist() {
+        final String stopString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_STOPLIST_VALUES);
+        splitAndAddToArrayList(mStoplist, stopString, "\\|");
+    }
+
+    private void setHeadsUpBlacklist() {
+        final String blackString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES);
+        splitAndAddToArrayList(mBlacklist, blackString, "\\|");
     }
 
     protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
@@ -8385,6 +8408,20 @@ public class StatusBar extends SystemUI implements DemoMode,
             return false;
         }
 
+
+        // get the info from the currently running task
+        List<ActivityManager.RunningTaskInfo> taskInfo = mAm.getRunningTasks(1);
+        if(taskInfo != null && !taskInfo.isEmpty()) {
+            ComponentName componentInfo = taskInfo.get(0).topActivity;
+            if(isPackageInStoplist(componentInfo.getPackageName())
+                && !isDialerApp(sbn.getPackageName())) {
+                return false;
+            }
+        }
+
+        if(isPackageBlacklisted(sbn.getPackageName())) {
+            return false;
+        }
 
         if (!mUseHeadsUp || isDeviceInVrMode() || (!isDozing() && mLessBoringHeadsUp &&
                 !isImportantHeadsUp)) {
