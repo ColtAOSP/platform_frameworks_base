@@ -5061,7 +5061,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         int userThemeSetting = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.DEVICE_THEME, 0, mCurrentUserId);
         boolean useBlackTheme = false;
-        boolean useDarkTheme = false;
+
+        int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.SYSTEM_THEME_STYLE, 0, mCurrentUserId);
+
         if (userThemeSetting == 0) {
             // The system wallpaper defines if QS should be light or dark.
             WallpaperColors systemColors = mColorExtractor
@@ -6315,6 +6318,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.DEVICE_THEME),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SYSTEM_THEME_STYLE),
+                    false, this, UserHandle.USER_ALL);
+
             update();
         }
 
@@ -6384,6 +6391,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpStoplist();
             setHeadsUpBlacklist();
             updateRecentsIconPack();
+            updateTheme();
         }
     }
 
