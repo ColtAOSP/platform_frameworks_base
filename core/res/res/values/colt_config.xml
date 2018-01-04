@@ -70,4 +70,8 @@
 
     <!-- Boost parameters which get passed to QPerformance -->
     <integer-array name="onbootboost_param_value"/>
+
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_enableSmartPixels">false</bool>
+
 </resources>
