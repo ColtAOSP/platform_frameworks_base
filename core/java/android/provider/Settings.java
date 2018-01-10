@@ -4592,8 +4592,26 @@ public final class Settings {
         public static final String BATTERY_BAR_USE_GRADIENT_COLOR = "battery_bar_use_gradient_color";
 
         /**
-         * Whether to show the weather info on the lock screen
+         * Hide lockscreen date
          * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_DATE = "hide_lockscreen_date";
+
+        /**
+         * Hide lockscreen clock
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_CLOCK = "hide_lockscreen_clock";
+
+        /**
+         * Hide lockscreen alarm
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_ALARM = "hide_lockscreen_alarm";
+
+        /**
+	 * LockScreen Weather
+	 * @hide
          */
         public static final String LOCK_SCREEN_SHOW_WEATHER = "lock_screen_show_weather";
 
