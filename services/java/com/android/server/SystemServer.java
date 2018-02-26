@@ -47,7 +47,7 @@ import android.os.UserHandle;
 import android.os.storage.IStorageManager;
 import android.util.TimingsTraceLog;
 import android.provider.Settings;
-import android.util.BootTimingsTraceLog;
+import android.util.TimingsTraceLog;
 import android.util.DisplayMetrics;
 import android.util.EventLog;
 import android.util.Slog;

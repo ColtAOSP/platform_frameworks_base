@@ -264,6 +264,7 @@ import com.android.systemui.statusbar.stack.StackStateAnimator;
 import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.leak.LeakDetector;
 import com.android.systemui.volume.VolumeComponent;
+import com.android.systemui.statusbar.phone.ThemeAccentUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -5058,8 +5059,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null;
 
-        int userThemeSetting = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.DEVICE_THEME, 0, mCurrentUserId);
         boolean useBlackTheme = false;
 
         int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
@@ -6315,9 +6314,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RECENTS_ICON_PACK),
 		  false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.DEVICE_THEME),
-                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SYSTEM_THEME_STYLE),
                     false, this, UserHandle.USER_ALL);
