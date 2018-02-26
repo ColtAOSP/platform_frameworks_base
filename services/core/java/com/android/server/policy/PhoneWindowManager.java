@@ -240,7 +240,6 @@ import com.android.internal.policy.IKeyguardService;
 import com.android.internal.policy.IShortcutService;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.util.aospextended.AEXUtils;
 import com.android.internal.util.ScreenShapeHelper;
 import com.android.internal.util.colt.ColtUtils;
 import com.android.internal.widget.PointerLocationView;
@@ -967,7 +966,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 }
                 case MSG_TOGGLE_TORCH:
                     performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, true);
-                    AEXUtils.toggleCameraFlash();
+                    ColtUtils.toggleCameraFlash();
                     break;
             }
         }
@@ -1570,7 +1569,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case MULTI_PRESS_POWER_NOTHING:
                 if ((mTorchActionMode == 1) && (!isScreenOn() || isDozeMode())) {
                     performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, true);
-                    AEXUtils.toggleCameraFlash();
+                    ColtUtils.toggleCameraFlash();
                 }
                 break;
             case MULTI_PRESS_POWER_THEATER_MODE:
@@ -2517,7 +2516,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_CURRENT);
         }
 
-        }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
             PolicyControl.reloadFromSetting(mContext);
         }
