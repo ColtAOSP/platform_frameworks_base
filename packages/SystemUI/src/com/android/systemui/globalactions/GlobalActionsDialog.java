@@ -551,7 +551,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
             try {
                  Thread.sleep(1000); //1s
             } catch (InterruptedException ie) {}
-            AEXUtils.takeScreenshot(true);
+            ColtUtils.takeScreenshot(true);
         }
 
 
@@ -562,7 +562,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
             try {
                  Thread.sleep(1000); //1s
             } catch (InterruptedException ie) {}
-            AEXUtils.takeScreenshot(false);
+            ColtUtils.takeScreenshot(false);
             return true;
         }
 
