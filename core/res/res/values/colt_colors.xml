@@ -25,4 +25,7 @@
     <color name="condition_card_background">#f8f8f8</color>
     <color name="global_wifi_details_icon_color">#8A000000</color>
 
+    <!-- Updater snackbar text color -->
+    <color name="updater_snackbar_text_color">@android:color/white</color>
+
 </resources>
