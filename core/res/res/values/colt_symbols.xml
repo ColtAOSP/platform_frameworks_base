@@ -92,5 +92,8 @@
   <!-- Common boost params -->
   <java-symbol type="array" name="qboost_strong_param_value" />
   <java-symbol type="array" name="qboost_weak_param_value" />  
+
+  <!-- Updater snackbar text color -->
+  <java-symbol type="color" name="updater_snackbar_text_color" />
   
 </resources>
