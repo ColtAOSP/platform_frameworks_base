@@ -6409,7 +6409,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         boolean useHapticFeedback = down
                 && (policyFlags & WindowManagerPolicy.FLAG_VIRTUAL) != 0
                 && repeatCount == 0
-                && !isHwKeysDisabled()
+                && !isHwKeysDisabled();
 
 
         // Specific device key handling
