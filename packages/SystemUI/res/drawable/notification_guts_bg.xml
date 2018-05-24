@@ -17,6 +17,6 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/notification_guts_bg_color" />
-    <!--Like Androip P-->
-    <corners android:radius="@*com.android.systemui:dimen/recents_task_view_rounded_corners_radius" />
+    <!--Androip P-ify-->
+    <corners android:radius="@*com.android.systemui:dimen/rounded_corner_colt_radius" />
 </shape>
