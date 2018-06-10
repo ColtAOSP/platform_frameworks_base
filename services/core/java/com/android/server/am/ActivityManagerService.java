@@ -555,7 +555,6 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     // How many bytes to write into the dropbox log before truncating
     static final int DROPBOX_MAX_SIZE = 192 * 1024;
-    static final String PROP_REFRESH_THEME = "sys.refresh_theme";
     // Assumes logcat entries average around 100 bytes; that's not perfect stack traces count
     // as one line, but close enough for now.
     static final int RESERVED_BYTES_PER_LOGCAT_LINE = 100;
@@ -607,6 +606,9 @@ public class ActivityManagerService extends IActivityManager.Stub
     private static final int MAX_BUGREPORT_TITLE_SIZE = 50;
 
     private static final int NATIVE_DUMP_TIMEOUT_MS = 2000; // 2 seconds;
+
+   // System prop for refreshing font
+    private static final String PROP_REFRESH_FONT = "sys.refresh_font";
 
     /* Freq Aggr boost objects */
     public static BoostFramework sFreqAggr_init = null;
@@ -3942,12 +3944,12 @@ public class ActivityManagerService extends IActivityManager.Stub
                 debugFlags |= Zygote.DEBUG_ENABLE_ASSERT;
             }
 
-            //Check if zygote should refresh its fonts
-            boolean refreshTheme = false;
-            if (SystemProperties.getBoolean(PROP_REFRESH_THEME, false)) {
-				SystemProperties.set(PROP_REFRESH_THEME, "false");
-				refreshTheme = true;
-			}
+            // Check if zygote should refresh its fonts
+            boolean refreshFont = false;
+            if (SystemProperties.getBoolean(PROP_REFRESH_FONT, false)) {
+                SystemProperties.set(PROP_REFRESH_FONT, "false");
+                refreshFont = true;
+            }
 
             if (mNativeDebuggingApp != null && mNativeDebuggingApp.equals(app.processName)) {
                 // Enable all debug flags required by the native debugger.
@@ -4005,12 +4007,12 @@ public class ActivityManagerService extends IActivityManager.Stub
                 startResult = startWebView(entryPoint,
                         app.processName, uid, uid, gids, debugFlags, mountExternal,
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
-                        app.info.dataDir, null, refreshTheme, entryPointArgs);
+                        app.info.dataDir, null, refreshFont, entryPointArgs);
             } else {
                 startResult = Process.start(entryPoint,
                         app.processName, uid, uid, gids, debugFlags, mountExternal,
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
-                        app.info.dataDir, invokeWith, refreshTheme, entryPointArgs);
+                        app.info.dataDir, invokeWith, refreshFont, entryPointArgs);
             }
             checkTime(startTime, "startProcess: returned from zygote!");
             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);

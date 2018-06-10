@@ -192,7 +192,7 @@ class ZygoteConnection {
             }
         }
 
-        if (parsedArgs.refreshTheme) {
+        if (parsedArgs.refreshFont) {
             Typeface.recreateDefaults();
         }
 
@@ -385,8 +385,8 @@ class ZygoteConnection {
         /** from --invoke-with */
         String invokeWith;
 
-        /** from --refresh-theme */
-        boolean refreshTheme;
+        /** from --refresh-font */
+        boolean refreshFont;
 
         /**
          * Any args after and including the first non-option arg
@@ -590,8 +590,8 @@ class ZygoteConnection {
                     preloadPackageCacheKey = args[++curArg];
                 } else if (arg.equals("--preload-default")) {
                     preloadDefault = true;
-                } else if (arg.equals("--refresh_theme")) {
-                    refreshTheme = true;
+                } else if (arg.equals("--refresh_font")) {
+                    refreshFont = true;
                 } else {
                     break;
                 }

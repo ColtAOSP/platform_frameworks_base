@@ -203,12 +203,12 @@ public class ZygoteProcess {
                                                   String instructionSet,
                                                   String appDataDir,
                                                   String invokeWith,
-                                                  boolean refreshTheme,
+                                                  boolean refreshFont,
                                                   String[] zygoteArgs) {
         try {
             return startViaZygote(processClass, niceName, uid, gid, gids,
                     debugFlags, mountExternal, targetSdkVersion, seInfo,
-                    abi, instructionSet, appDataDir, invokeWith, refreshTheme, zygoteArgs);
+                    abi, instructionSet, appDataDir, invokeWith, refreshFont, zygoteArgs);
         } catch (ZygoteStartFailedEx ex) {
             Log.e(LOG_TAG,
                     "Starting VM process through Zygote failed");
@@ -339,7 +339,7 @@ public class ZygoteProcess {
                                                       String instructionSet,
                                                       String appDataDir,
                                                       String invokeWith,
-                                                      boolean refreshTheme,
+                                                      boolean refreshFont,
                                                       String[] extraArgs)
                                                       throws ZygoteStartFailedEx {
         ArrayList<String> argsForZygote = new ArrayList<String>();
@@ -376,8 +376,8 @@ public class ZygoteProcess {
         if ((debugFlags & Zygote.DEBUG_ENABLE_ASSERT) != 0) {
             argsForZygote.add("--enable-assert");
         }
-        if (refreshTheme) {
-            argsForZygote.add("--refresh_theme");
+        if (refreshFont) {
+            argsForZygote.add("--refresh_font");
         }
         if (mountExternal == Zygote.MOUNT_EXTERNAL_DEFAULT) {
             argsForZygote.add("--mount-external-default");
@@ -386,8 +386,8 @@ public class ZygoteProcess {
         } else if (mountExternal == Zygote.MOUNT_EXTERNAL_WRITE) {
             argsForZygote.add("--mount-external-write");
         }
-        if (refreshTheme) {
-            argsForZygote.add("--refresh_theme");
+        if (refreshFont) {
+            argsForZygote.add("--refresh_font");
         }
         argsForZygote.add("--target-sdk-version=" + targetSdkVersion);
 
