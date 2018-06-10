@@ -127,5 +127,18 @@ interface ISubstratumService {
      */
     void applyShutdownAnimation(String name);
 
+    /**
+     * Returns information about all installed overlay packages for the
+     * specified user. If there are no installed overlay packages for this user,
+     * an empty map is returned (i.e. null is never returned). The returned map is a
+     * mapping of target package names to lists of overlays. Each list for a
+     * given target package is sorted in priority order, with the overlay with
+     * the highest priority at the end of the list.
+     *
+     * @param uid The user to get the OverlayInfos for.
+     * @return A Map<String, List<OverlayInfo>> with target package names
+     *         mapped to lists of overlays; if no overlays exist for the
+     *         requested user, an empty map is returned.
+     */
+    Map getAllOverlays(in int uid);
 }
-
