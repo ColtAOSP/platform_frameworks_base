@@ -192,8 +192,14 @@ public class UriTest extends TestCase {
         assertEquals("a:a@example.com:a@example2.com", uri.getAuthority());
         assertEquals("example2.com", uri.getHost());
         assertEquals(-1, uri.getPort());
-    }
+        assertEquals("/path", uri.getPath());
 
+        uri = Uri.parse("http://a.foo.com\\.example.com/path");
+        assertEquals("a.foo.com", uri.getHost());
+        assertEquals(-1, uri.getPort());
+        assertEquals("\\.example.com/path", uri.getPath());
+
+    }
     @SmallTest
     public void testBuildUponOpaqueUri() {
         Uri a = Uri.fromParts("foo", "bar", "tee");
