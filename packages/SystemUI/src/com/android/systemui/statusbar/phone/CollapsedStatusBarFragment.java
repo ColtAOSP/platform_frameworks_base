@@ -75,7 +75,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCenterClock;
     private LinearLayout mCenterClockLayout;
 
-    private SettingsObserver mSettingsObserver;
     private ContentResolver mContentResolver;
 
     private int mTickerEnabled;
@@ -96,7 +95,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mKeyguardMonitor = Dependency.get(KeyguardMonitor.class);
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarComponent = SysUiServiceProvider.getComponent(getContext(), StatusBar.class);
-        mSettingsObserver = new SettingsObserver(new Handler());
         mTickerObserver = new TickerObserver(new Handler());
     }
 
@@ -187,8 +185,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
 
-        mSettingsObserver.observe();
-        mSettingsObserver.update();
         mTickerObserver.observe();
         mTickerObserver.update();
 
